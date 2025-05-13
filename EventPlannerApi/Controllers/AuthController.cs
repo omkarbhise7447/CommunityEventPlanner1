@@ -31,7 +31,7 @@ namespace EventPlannerApi.Controllers
         public async Task<IActionResult> Login([FromBody] LoginModel model)
         {
             var token = await _authService.LoginAsync(model);
-            HttpContext.Session.SetString("token", token);
+            //HttpContext.Session.SetString("token", token);
             if (token == null)
                 return Unauthorized("Invalid email or password");
 
