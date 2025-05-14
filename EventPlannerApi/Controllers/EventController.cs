@@ -32,6 +32,54 @@ namespace EventPlannerApi.Controllers
             var createdEvent = await _eventService.CreateEventAsync(model, userId);
             return Ok(createdEvent);
         }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> GetAll()
+        {
+
+            return Ok(await _eventService.GetAllEventsAsync());
+        }
+
+        [HttpGet("my")]
+        public async Task<IActionResult> GetMy()
+        {
+
+            return Ok(await _eventService.GetMyEventsAsync(User.FindFirstValue(ClaimTypes.NameIdentifier)));
+        } 
+
+        [HttpGet("{id}")]
+        [AllowAnonymous]
+        public async Task<IActionResult> Get(int id)
+        {
+
+            return Ok(await _eventService.GetEventByIdAsync(id));
+        }
+
+        [HttpPut("{id}")]
+        [Authorize]
+        public async Task<IActionResult> UpdateEvent(int id, [FromBody] CreateEventModel model)
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var result = await _eventService.UpdateEventAsync(id, model, userId);
+            return Ok(result);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var success = await _eventService.DeleteEventAsync(id, userId);
+            return success ? NoContent() : Forbid();
+        }
+
+        [HttpPost("filter")]
+        public async Task<IActionResult> Filter([FromBody] EventFilterRequest filter)
+        {
+            var result = await _eventService.FilterEventsAsync(filter);
+            return Ok(result);
+        }
+
     }
 }
 

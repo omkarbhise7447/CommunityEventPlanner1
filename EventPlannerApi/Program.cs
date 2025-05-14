@@ -106,6 +106,8 @@ namespace EventPlannerApi
             builder.Services.AddTransient<ITokenGenratorService, TokenGenratorService>();
             builder.Services.AddTransient<IEventRepository, EventRepository>();
             builder.Services.AddTransient<IEventService, EventService>();
+            builder.Services.AddTransient<IRSVPRepository, RSVPRepository>();
+            builder.Services.AddTransient<IRSVPService, RSVPService>();
 
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 

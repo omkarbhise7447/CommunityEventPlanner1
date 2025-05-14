@@ -37,5 +37,7 @@ namespace EventPlannerApi.Controllers
 
             return Ok(new {token});
         }
+
+
     }
 }

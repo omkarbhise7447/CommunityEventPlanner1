@@ -11,5 +11,15 @@ namespace Services.Contract
     public interface IEventService
     {
         Task<EventResponseModel> CreateEventAsync(CreateEventModel model, string userId);
+        Task<IEnumerable<EventResponseModel>> GetAllEventsAsync();
+        Task<IEnumerable<EventResponseModel>> GetMyEventsAsync(string userId);
+        Task<EventResponseModel> GetEventByIdAsync(int id);
+
+        Task<EventResponseModel> UpdateEventAsync(int eventId, CreateEventModel model, string userId);
+        Task<bool> DeleteEventAsync(int id, string userId);
+
+        Task<IEnumerable<EventResponseModel>> FilterEventsAsync(EventFilterRequest filter);
+
+
     }
 }
