@@ -85,7 +85,7 @@ namespace Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Category");
+                    b.ToTable("Categories");
                 });
 
             modelBuilder.Entity("Data.Event", b =>
@@ -433,7 +433,7 @@ namespace Data.Migrations
                     b.HasOne("Data.Event", "Event")
                         .WithMany("RSVPs")
                         .HasForeignKey("EventId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Data.User", "User")

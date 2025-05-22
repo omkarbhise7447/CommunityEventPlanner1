@@ -12,7 +12,7 @@ namespace Services.Contract
     {
         Task<EventResponseModel> CreateEventAsync(CreateEventModel model, string userId);
         Task<IEnumerable<EventResponseModel>> GetAllEventsAsync();
-        Task<IEnumerable<EventResponseModel>> GetMyEventsAsync(string userId);
+        Task<(IEnumerable<EventResponseModel> events, int totalCount)> GetMyEventsAsync(string userId, int page, int pageSize, EventFilterRequest filters);
         Task<EventResponseModel> GetEventByIdAsync(int id);
 
         Task<EventResponseModel> UpdateEventAsync(int eventId, CreateEventModel model, string userId);
@@ -20,6 +20,7 @@ namespace Services.Contract
 
         Task<IEnumerable<EventResponseModel>> FilterEventsAsync(EventFilterRequest filter);
 
+        Task<(IEnumerable<EventResponseModel> events, int totalCount)> GetEventsAsync(int page, int pageSize, EventFilterRequest filters);
 
     }
 }

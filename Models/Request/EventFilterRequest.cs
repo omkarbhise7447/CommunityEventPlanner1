@@ -8,9 +8,11 @@ namespace Models.Request
 {
     public class EventFilterRequest
     {
-        public int? CategoryId { get; set; }
+        public string? Category { get; set; }
         public DateOnly? StartDate { get; set; }
         public DateOnly? EndDate { get; set; }
         public string? City { get; set; }
+
+        public string? Search { get; set; }
     }
 }

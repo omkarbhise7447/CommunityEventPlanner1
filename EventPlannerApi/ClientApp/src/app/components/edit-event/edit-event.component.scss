@@ -1,0 +1,217 @@
+:host {
+    --primary-color: #c084fc;
+    --primary-hover: #a855f7; /* Darker purple for hover */
+  --accent-color: #FF6584; /* Coral for accents */
+  --accent-hover: #E05A75; /* Darker coral for hover */
+  --text-color: #333333; /* Dark gray for text */
+  --background-color: #F7F7FA; /* Light gray background */
+  --card-background: #FFFFFF; /* White card background */
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --error-color: #F44336; /* Red for errors */
+}
+
+.edit-event-container {
+  padding: 20px;
+  background: var(--background-color);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.event-card {
+  max-width: 700px;
+  width: 100%;
+  background: var(--card-background);
+  border-radius: 12px;
+  box-shadow: 0 6px 12px var(--shadow-color);
+}
+
+mat-card-header {
+  background: var(--primary-color);
+  padding: 20px;
+  text-align: center;
+  color: white;
+}
+
+mat-card-title {
+  font-size: 1.8rem;
+  font-weight: 500;
+}
+
+mat-card-subtitle {
+  font-size: 1rem;
+  opacity: 0.9;
+}
+
+mat-card-content {
+  padding: 30px;
+}
+
+.event-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+mat-label {
+  color: var(--primary-color);
+}
+
+textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.location-section {
+  background: var(--card-background);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px var(--shadow-color);
+  border: 1px solid var(--primary-color);
+}
+
+.location-section h3 {
+  margin: 0 0 20px 0;
+  font-size: 1.2rem;
+  color: var(--primary-color);
+}
+
+.map-toggle-section {
+  background: var(--card-background);
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px var(--shadow-color);
+  border: 1px solid var(--primary-color);
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.map-container {
+  height: 400px;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 5px var(--shadow-color);
+  margin-bottom: 20px;
+}
+
+.geo-coordinates-section {
+  background: var(--card-background);
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px var(--shadow-color);
+  border: 1px solid var(--primary-color);
+  margin-top: 20px; /* Add spacing to distinguish from map */
+}
+
+.geo-coordinates-section h3 {
+  margin: 0 0 15px 0;
+  font-size: 1.1rem;
+  color: var(--primary-color);
+  background: rgba(108, 99, 255, 0.1); /* Light purple background for emphasis */
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+.geo-coordinates {
+  display: flex;
+  gap: 20px;
+}
+
+.geo-coordinates mat-form-field {
+  flex: 1;
+}
+
+.form-actions {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+}
+
+button[mat-raised-button] {
+  padding: 8px 20px;
+  transition: all 0.3s ease;
+}
+
+button[mat-raised-button][color="primary"] {
+  background: var(--primary-color);
+  color: white;
+}
+
+button[mat-raised-button][color="primary"]:hover:not([disabled]) {
+  background: var(--primary-hover);
+  transform: translateY(-2px);
+}
+
+button[mat-raised-button][color="accent"] {
+  background: var(--accent-color);
+  color: white;
+}
+
+button[mat-raised-button][color="accent"]:hover:not([disabled]) {
+  background: var(--accent-hover);
+  transform: translateY(-2px);
+}
+
+button[mat-raised-button][color="warn"] {
+  background: #E0E0E0;
+  color: var(--text-color);
+}
+
+button[mat-raised-button][color="warn"]:hover:not([disabled]) {
+  background: #D0D0D0;
+  transform: translateY(-2px);
+}
+
+mat-spinner {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+mat-error {
+  color: var(--error-color);
+}
+
+@media (max-width: 600px) {
+  .edit-event-container {
+    padding: 10px;
+  }
+
+  .event-card {
+    margin: 0;
+  }
+
+  mat-card-header {
+    padding: 15px;
+  }
+
+  mat-card-title {
+    font-size: 1.5rem;
+  }
+
+  mat-card-content {
+    padding: 20px;
+  }
+
+  .map-container {
+    height: 300px;
+  }
+
+  .geo-coordinates {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .form-actions {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  button[mat-raised-button] {
+    width: 100%;
+  }
+}

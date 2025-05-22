@@ -1,0 +1,39 @@
+:root {
+    --primary-color: #c084fc;
+    --primary-hover: #a855f7;
+    --hover-color: rgb(215, 138, 236);
+  }
+  
+  button {
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+  
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+    }
+  
+    &[disabled] {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  @keyframes slideIn {
+    from {
+      transform: translateY(20px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }

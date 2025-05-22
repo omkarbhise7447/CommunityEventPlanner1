@@ -1,0 +1,22 @@
+<div class="event-card" (click)="viewEvent.emit(event.id)">
+    <div class="event-header">
+      <h3>{{ event.title }}</h3>
+    </div>
+    <div class="event-details">
+      <p><strong>Date:</strong> {{ event.date === '0001-01-01' ? 'TBD' : (event.date | date:'mediumDate') }}</p>
+      <p><strong>Time:</strong> {{ formatTime(event.time) }}</p>
+      <p><strong>Location:</strong> {{ event.location.address.city }}</p>
+      <p><strong>Category:</strong> {{ event.categoryName }}</p>
+    </div>
+    <div class="event-actions">
+      <button mat-icon-button (click)="viewEvent.emit(event.id); $event.stopPropagation()">
+        <mat-icon>visibility</mat-icon>
+      </button>
+      <button mat-icon-button [routerLink]="['/edit-event', event.id]" *ngIf="showEditDelete && isCreator" (click)="$event.stopPropagation()">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button mat-icon-button (click)="deleteEvent.emit(event.id); $event.stopPropagation()" *ngIf="showEditDelete && isCreator">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+  </div>

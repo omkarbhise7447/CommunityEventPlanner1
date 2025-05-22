@@ -4,6 +4,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Models.Request;
 using Services.Contract;
+using Data;
 
 namespace EventPlannerApi.Controllers
 {
@@ -23,17 +24,24 @@ namespace EventPlannerApi.Controllers
         public async Task<IActionResult> AddEvent([FromBody] CreateEventModel model)
         {
             if (!ModelState.IsValid)
+            {
+
                 return BadRequest(ModelState);
+            }
 
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
             if (string.IsNullOrEmpty(userId))
+            {
+
                 return Unauthorized("User not found in token.");
+            }
 
             var createdEvent = await _eventService.CreateEventAsync(model, userId);
             return Ok(createdEvent);
         }
 
-        [HttpGet]
+        [HttpGet("nofilter")]
         [AllowAnonymous]
         public async Task<IActionResult> GetAll()
         {
@@ -41,11 +49,40 @@ namespace EventPlannerApi.Controllers
             return Ok(await _eventService.GetAllEventsAsync());
         }
 
-        [HttpGet("my")]
-        public async Task<IActionResult> GetMy()
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> GetAll([FromQuery] int page = 1, [FromQuery] int pageSize = 10, [FromQuery] string? category = null, [FromQuery] string? city = null, [FromQuery] DateOnly? startDate = null, [FromQuery] DateOnly? endDate = null, [FromQuery] string? search = null)
         {
+            var filter = new EventFilterRequest
+            {
+                Category = category,
+                City = city,
+                StartDate = startDate,
+                EndDate = endDate,
+                Search = search
+            };
 
-            return Ok(await _eventService.GetMyEventsAsync(User.FindFirstValue(ClaimTypes.NameIdentifier)));
+            var (events, totalCount) = await _eventService.GetEventsAsync(page, pageSize, filter);
+            return Ok(new { events, total = totalCount });
+        }
+
+        [HttpGet("my")]
+        public async Task<IActionResult> GetMy([FromQuery] int page = 1, [FromQuery] int pageSize = 10, [FromQuery] string? category = null, [FromQuery] string? city = null, [FromQuery] DateOnly? startDate = null, [FromQuery] DateOnly? endDate = null, [FromQuery] string? search = null)
+        {
+            string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            var filter = new EventFilterRequest
+            {
+                Category = category,
+                City = city,
+                StartDate = startDate,
+                EndDate = endDate,
+                Search = search
+            };
+
+            var (events, totalCount) = await _eventService.GetMyEventsAsync(userId, page, pageSize, filter);
+
+            return Ok(new { events, total = totalCount });
         } 
 
         [HttpGet("{id}")]
@@ -61,7 +98,9 @@ namespace EventPlannerApi.Controllers
         public async Task<IActionResult> UpdateEvent(int id, [FromBody] CreateEventModel model)
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
             var result = await _eventService.UpdateEventAsync(id, model, userId);
+
             return Ok(result);
         }
 
@@ -69,8 +108,9 @@ namespace EventPlannerApi.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
             var success = await _eventService.DeleteEventAsync(id, userId);
-            return success ? NoContent() : Forbid();
+            return success ? Ok(success) : Forbid();
         }
 
         [HttpPost("filter")]
@@ -109,75 +149,3 @@ namespace EventPlannerApi.Controllers
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//using Microsoft.AspNetCore.Authorization;
-//using System.Security.Claims;
-//using Microsoft.AspNetCore.Http;
-//using Microsoft.AspNetCore.Mvc;
-//using Models.Request;
-//using Services.Contract;
-//using System.IdentityModel.Tokens.Jwt;
-
-//namespace EventPlannerApi.Controllers
-//{
-//    [Route("api/[controller]")]
-//    [ApiController]
-//    [Authorize]
-//    public class EventController : ControllerBase
-//    {
-//        private readonly IEventService _eventService;
-
-//        public EventController(IEventService eventService)
-//        {
-//            _eventService = eventService;
-//        }
-
-//        [HttpPost("AddEvent")]
-//        //[AllowAnonymous]
-//        public async Task<IActionResult> AddEvent([FromBody] CreateEventModel model)
-//        {
-//            //var temptoken = HttpContext.Session.GetString("token");
-//            //if (string.IsNullOrEmpty(temptoken))
-//            //    return Unauthorized("Token not found in session");
-
-//            //var handler = new JwtSecurityTokenHandler();
-//            //var jwtToken = handler.ReadJwtToken(temptoken);
-
-//            if (!ModelState.IsValid)
-//                return BadRequest(ModelState);
-
-//            // Get user ID from JWT claims
-//            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-//            if (userId == null)
-//            {
-//                return Unauthorized("User found in token");
-//            }
-
-
-//                var token = await _eventService.CreateEventAsync(model, userId);
-//            return Ok(new { token });
-//        }
-//    }
-//}

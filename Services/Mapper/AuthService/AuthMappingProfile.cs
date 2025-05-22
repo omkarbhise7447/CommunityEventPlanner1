@@ -7,7 +7,7 @@ using AutoMapper;
 using Data;
 using Models.Response;
 using Models.User.Request;
-
+    
 
 namespace Services.Mapper.AuthService
 {

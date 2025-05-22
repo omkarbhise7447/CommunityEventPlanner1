@@ -1,0 +1,86 @@
+<app-loader [loading]="loading"></app-loader>
+
+<div class="dialog-container">
+  <div class="dialog-header">
+    <h2 *ngIf="event">{{ event.title }}</h2>
+    <button mat-icon-button class="close-button" (click)="closeDialog()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <div class="dialog-content" *ngIf="event; else loadingTemplate">
+    <div class="event-card">
+      <div class="event-info">
+        <p><strong>Description:</strong> {{ event.description }}</p>
+        <p><strong>Date:</strong> {{ formatDate(event.date) }}</p>
+        <p><strong>Time:</strong> {{ formatTime(event.time) }}</p>
+        <p><strong>Location:</strong> {{ formatAddress() }}</p>
+        <p><strong>Category:</strong> <span class="category-chip">{{ event.categoryName }}</span></p>
+        <p><strong>Created By:</strong> {{ event.user.userName }} ({{ event.user.email }})</p>
+      </div>
+
+      <div class="attendees-section">
+        <button mat-raised-button color="primary" (click)="toggleAttendees()">
+          {{ showAttendees ? 'Hide Attendees' : 'Show Attendees' }} ({{ attendees.length }})
+          <mat-icon>{{ showAttendees ? 'visibility_off' : 'people' }}</mat-icon>
+        </button>
+        <mat-list *ngIf="showAttendees && attendees.length > 0" class="attendees-list">
+          <mat-list-item *ngFor="let attendee of attendees">
+            {{ attendee.name }} ({{ attendee.email }})
+          </mat-list-item>
+        </mat-list>
+        <p *ngIf="showAttendees && attendees.length === 0" class="no-attendees">
+          No attendees yet.
+        </p>
+      </div>
+
+      <div class="map-toggle" *ngIf="isBrowser && event?.location?.latitude && event?.location?.longitude">
+        <button mat-raised-button color="primary" (click)="toggleMap()">
+          {{ showMap ? 'Hide Map' : 'Show Map' }}
+          <mat-icon>{{ showMap ? 'visibility_off' : 'map' }}</mat-icon>
+        </button>
+      </div>
+      <div *ngIf="showMap && isBrowser" class="map-container" #mapContainer></div>
+    </div>
+
+    <div class="event-actions">
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="editEvent()"
+        *ngIf="isCreator()"
+        matTooltip="Edit this event">
+        <mat-icon>edit</mat-icon> Update
+      </button>
+      <button
+        mat-raised-button
+        color="warn"
+        (click)="deleteEvent()"
+        *ngIf="isCreator()"
+        matTooltip="Delete this event">
+        <mat-icon>delete</mat-icon> Delete
+      </button>
+      <button
+        mat-raised-button
+        color="accent"
+        (click)="rsvp()"
+        [disabled]="isPastEvent() || hasRSVPed || isCreator()"
+        matTooltip="RSVP to this event"
+        *ngIf="isAuthenticated">
+        <mat-icon>check</mat-icon> RSVP
+      </button>
+      <button
+        mat-raised-button
+        color="warn"
+        (click)="cancelRsvp()"
+        *ngIf="isAuthenticated && hasRSVPed && !isCreator()"
+        matTooltip="Cancel your RSVP">
+        <mat-icon>cancel</mat-icon> Cancel RSVP
+      </button>
+    </div>
+  </div>
+
+  <ng-template #loadingTemplate>
+    <p>Loading event details...</p>
+  </ng-template>
+</div>

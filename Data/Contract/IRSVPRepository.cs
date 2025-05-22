@@ -13,5 +13,7 @@ namespace Data.Contract
         Task<bool> HasRSVPedAsync(int eventId, string userId);
         Task<IEnumerable<RSVP>> GetRSVPsByEventIdAsync(int eventId);
         Task<IEnumerable<RSVP>> GetMyRSVPsAsync(string userId);
+
+
     }
 }

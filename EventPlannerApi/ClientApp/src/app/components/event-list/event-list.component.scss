@@ -1,0 +1,212 @@
+:host {
+    --primary-color: #c084fc;
+    --primary-hover: #a855f7;
+    --hover-color: rgb(215, 138, 236);
+  }
+  
+  .page-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0; /* Remove padding since layout.component.scss already adds padding to .container */
+    background: linear-gradient(135deg, #f3e8ff 0%, #fff 100%); /* Adjusted to a lighter purple gradient */
+    min-height: 100vh;
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    animation: fadeIn 1s ease-in;
+  
+    .page-title {
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--primary-color);
+      background: linear-gradient(to right, var(--primary-color), var(--primary-hover));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  
+    .header-actions {
+      button {
+        background: var(--primary-color);
+        color: white;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+        transition: transform 0.2s ease, box-shadow 0.3s ease, background 0.3s ease;
+  
+        &:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+          background: var(--primary-hover);
+        }
+      }
+    }
+  }
+  
+  .filters-container {
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+    animation: slideIn 0.5s ease-out;
+  }
+  
+  .filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  
+    .filter-field {
+      flex: 1;
+      min-width: 200px;
+  
+      mat-label {
+        color: var(--primary-color);
+      }
+  
+      input,
+      mat-select {
+        transition: all 0.3s ease;
+  
+        &:focus {
+          border-color: var(--primary-hover);
+        }
+      }
+    }
+  }
+  
+  .error-message {
+    color: #d32f2f;
+    text-align: center;
+    padding: 20px;
+    background: #ffebee;
+    border-radius: 12px;
+    margin: 20px 0;
+    animation: fadeIn 0.5s ease-in;
+  }
+  
+  .table-container {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    animation: fadeIn 0.5s ease-in;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  
+    th {
+      background: linear-gradient(to right, var(--primary-color), var(--primary-hover));
+      color: white;
+      font-weight: 600;
+      padding: 15px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+  
+      .title-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+  
+        span {
+          flex-grow: 1;
+        }
+  
+        mat-icon-button {
+          color: white;
+          margin-left: 5px;
+  
+          mat-icon {
+            font-size: 20px;
+          }
+        }
+      }
+    }
+  
+    td {
+      padding: 15px;
+      border-bottom: 1px solid #e0e0e0;
+      color: #333;
+    }
+  
+    .event-row {
+      transition: background 0.3s ease, transform 0.2s ease;
+  
+      &:hover {
+        background: rgba(215, 138, 236, 0.1); /* Use a light version of hover-color */
+        transform: translateY(-2px);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      }
+    }
+  }
+  
+  .event-title-wrapper {
+    display: flex;
+    flex-direction: column;
+  
+    .event-title {
+      font-weight: 500;
+      color: var(--primary-color);
+    }
+  }
+  
+  .category-chip {
+    display: inline-block;
+    padding: 5px 10px;
+    background: rgba(215, 138, 236, 0.2); /* Use a light version of hover-color */
+    color: var(--primary-color);
+    border-radius: 16px;
+    font-size: 12px;
+    font-weight: 500;
+  }
+  
+  .rsvp-message {
+    color: #388e3c;
+    font-size: 12px;
+    margin-top: 5px;
+  }
+  
+  button[disabled] {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  
+  mat-paginator {
+    margin-top: 20px;
+    background: #f5f5f5;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .event-details-dialog {
+    border-radius: 12px;
+    overflow: hidden;
+  
+    .mat-dialog-container {
+      padding: 0;
+    }
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  @keyframes slideIn {
+    from {
+      transform: translateY(20px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }

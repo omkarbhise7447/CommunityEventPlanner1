@@ -30,6 +30,8 @@ namespace Data
         public DbSet<User> Users {  get; set; }
         public DbSet<Event> Events { get; set; }
         public DbSet<RSVP> RSVPs { get; set; }
+
+        public DbSet<Category> Categories { get; set; }
     
     }
 }

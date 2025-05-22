@@ -1,0 +1,82 @@
+.attendee-card {
+    margin: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    background: white;
+    animation: fadeIn 0.5s ease-in;
+  
+    mat-card-header {
+      background: linear-gradient(to right, #3f51b5, #1976d2);
+      color: white;
+      border-top-left-radius: 12px;
+      border-top-right-radius: 12px;
+      padding: 15px;
+  
+      mat-card-title {
+        font-size: 20px;
+        font-weight: 600;
+      }
+    }
+  
+    mat-card-content {
+      padding: 20px;
+    }
+  }
+  
+  .attendee-item {
+    margin: 10px 0;
+    transition: background 0.3s ease;
+  
+    &:hover {
+      background: #e3f2fd;
+      border-radius: 8px;
+    }
+  
+    .attendee-content {
+      display: flex;
+      align-items: center;
+  
+      .profile-icon {
+        margin-right: 15px;
+        color: #3f51b5;
+      }
+  
+      .attendee-info {
+        display: flex;
+        flex-direction: column;
+  
+        .attendee-name {
+          font-weight: 500;
+          color: #1a237e;
+        }
+  
+        .attendee-email {
+          font-size: 12px;
+          color: #666;
+        }
+      }
+    }
+  }
+  
+  .no-attendees {
+    text-align: center;
+    color: #666;
+    font-style: italic;
+  }
+  
+  .error {
+    color: #d32f2f;
+    text-align: center;
+    padding: 15px;
+    background: #ffebee;
+    border-radius: 8px;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }

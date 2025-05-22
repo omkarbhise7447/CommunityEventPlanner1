@@ -19,6 +19,16 @@ namespace EventPlannerApi
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowFrontend", policy =>
+                {
+                    policy.WithOrigins("http://localhost:4200")
+                          .AllowAnyHeader()
+                          .AllowAnyMethod();
+                });
+            });
+
             // Database
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DatabaseConnection")));
@@ -108,6 +118,8 @@ namespace EventPlannerApi
             builder.Services.AddTransient<IEventService, EventService>();
             builder.Services.AddTransient<IRSVPRepository, RSVPRepository>();
             builder.Services.AddTransient<IRSVPService, RSVPService>();
+            builder.Services.AddTransient<ICategoryRepository, CategoryRepository>();
+            builder.Services.AddTransient<ICategoryService, CategoryService>();
 
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
@@ -119,7 +131,7 @@ namespace EventPlannerApi
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
-
+            app.UseCors("AllowFrontend");
             app.UseHttpsRedirection();
             app.UseAuthentication();
             app.UseAuthorization();

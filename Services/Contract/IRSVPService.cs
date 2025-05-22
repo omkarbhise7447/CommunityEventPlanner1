@@ -14,6 +14,9 @@ namespace Services.Contract
         Task<bool> CancelRSVPAsync(int eventId, string userId);
         Task<IEnumerable<AttendeeDto>> GetAttendeesAsync(int eventId);
         Task<IEnumerable<RSVPResponseModel>> GetMyRSVPsAsync(string userId);
-        Task<IEnumerable<RSVPResponseModel>> GetMyUpcomingEventsAsync(string userId);
+
+        //Task<IEnumerable<RSVPResponseModel>> GetMyRSVPsPaginatedAsync(string userId, int page, int pageSize, string search, string category, string city, DateTime? startDate, DateTime? endDate);
+        //Task<IEnumerable<RSVPResponseModel>> GetMyUpcomingEventsAsync(string userId);
+        Task<IEnumerable<RSVPResponseModel>> GetMyUpcomingEventsAsync(string userId, DateOnly? filterDate = null);
     }
 }

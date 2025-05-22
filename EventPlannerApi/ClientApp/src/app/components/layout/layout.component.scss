@@ -1,0 +1,225 @@
+:host {
+    --primary-color: #c084fc;
+    --primary-hover: #a855f7;
+    --hover-color: rgb(123, 0, 255); /* Lighter purple for hover */
+    --selected-color: rgb(128, 0, 255); /* Deeper purple for selected/active */
+  }
+  
+  .navbar {
+    background: linear-gradient(90deg, var(--primary-color) 0%, var(--primary-hover) 100%);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    padding: 0 20px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    border-bottom-left-radius: 32px;
+    border-bottom-right-radius: 32px;
+    position: relative;
+  }
+  
+  .logo {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  
+  .logo:hover {
+    color: var(--hover-color);
+  }
+  
+  .spacer {
+    flex: 1 1 auto;
+  }
+  
+  .nav-links {
+    display: flex;
+    align-items: center;
+  }
+  
+  .nav-link {
+    color: white;
+    text-decoration: none;
+    font-size: 1.1rem;
+    margin-right: 15px;
+    padding: 5px 0;
+    transition: color 0.3s ease, border-bottom 0.3s ease;
+  }
+  
+  .nav-link:hover {
+    color: var(--hover-color);
+  }
+  
+  .nav-link.active-link {
+    color: var(--selected-color);
+    border-bottom: 2px solid var(--selected-color);
+  }
+  
+  .nav-button {
+    color: white;
+    font-size: 1.1rem;
+    margin-left: 10px;
+    padding: 5px 0;
+    transition: color 0.3s ease, border-bottom 0.3s ease;
+  }
+
+  
+  
+  .nav-button:hover {
+    color: var(--hover-color);
+  }
+  
+  .nav-button.active-link {
+    color: var(--selected-color);
+    border-bottom: 2px solid var(--selected-color);
+  }
+  
+  .profile-menu {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 5px 10px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  
+  .profile-menu:hover {
+    background-color: rgba(200, 150, 255, 0.2); /* Match hover style with nav links */
+    color: var(--hover-color);
+  }
+  
+  .profile-menu:hover .user-email,
+  .profile-menu:hover .profile-icon {
+    color: var(--hover-color);
+  }
+  
+  .profile-menu .user-email {
+    color: white;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: color 0.3s ease;
+  }
+  
+  .profile-menu .profile-icon {
+    color: white;
+    transition: color 0.3s ease;
+  }
+  
+  mat-menu {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  button[mat-menu-item] {
+    color: #333;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  button[mat-menu-item]:hover {
+    background-color: rgba(200, 150, 255, 0.3); /* Updated hover color */
+    color: var(--hover-color);
+  }
+  
+  button[mat-menu-item] mat-icon {
+    color: #666;
+    transition: color 0.3s ease;
+  }
+  
+  button[mat-menu-item]:hover mat-icon {
+    color: var(--hover-color);
+  }
+  
+  .hamburger-menu {
+    display: none;
+    color: white;
+  }
+  
+  .container {
+    padding: 16px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .mobile-nav {
+    display: none;
+    position: absolute;
+    top: 64px;
+    left: 0;
+    right: 0;
+    background: white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+    flex-direction: column;
+    z-index: 1000;
+  }
+  
+  .mobile-nav-link {
+    padding: 15px 20px;
+    color: #333;
+    text-decoration: none;
+    font-size: 1.1rem;
+    border-bottom: 1px solid #e0e0e0;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  .mobile-nav-link:hover {
+    background-color: rgba(200, 150, 255, 0.3); /* Updated hover color */
+    color: var(--hover-color);
+  }
+  
+  .mobile-nav-link.active-link {
+    background-color: rgba(150, 100, 200, 0.2); /* Updated selected color */
+    color: var(--selected-color);
+    font-weight: 500;
+  }
+  
+  @media (max-width: 768px) {
+    .navbar {
+      padding: 0 10px;
+      height: auto;
+      min-height: 64px;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+  
+    .logo {
+      font-size: 1.5rem;
+    }
+  
+    .spacer {
+      display: none;
+    }
+  
+    .desktop-nav {
+      display: none;
+    }
+  
+    .hamburger-menu {
+      display: block;
+    }
+  
+    .mobile-nav {
+      display: flex;
+    }
+  
+    .profile-menu .user-email {
+      display: none;
+    }
+  
+    .profile-menu {
+      padding: 5px;
+      border-radius: 50%;
+    }
+  
+    .profile-menu:hover {
+      background-color: rgba(200, 150, 255, 0.2); /* Updated hover color */
+    }
+  }

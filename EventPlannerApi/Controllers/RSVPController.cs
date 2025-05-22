@@ -22,8 +22,10 @@ namespace EventPlannerApi.Controllers
         public async Task<IActionResult> RSVP(int eventId)
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
             var result = await _rsvpService.RSVPAsync(eventId, userId);
-            return Ok(result);
+
+            return Ok(new { result });
         }
 
         [HttpDelete("{eventId}")]
@@ -31,7 +33,9 @@ namespace EventPlannerApi.Controllers
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var success = await _rsvpService.CancelRSVPAsync(eventId, userId);
-            return success ? NoContent() : NotFound("RSVP not found.");
+
+            return success ? Ok(new { Success = true, Message = "RSVP canceled" })
+                : NotFound(new { Success = false, Message = "RSVP not found" }); ;
         }
 
         [HttpGet("event/{eventId}")]
@@ -39,23 +43,39 @@ namespace EventPlannerApi.Controllers
         public async Task<IActionResult> GetAttendees(int eventId)
         {
             var result = await _rsvpService.GetAttendeesAsync(eventId);
-            return Ok(result);
+
+            return Ok(new { result});
         }
 
         [HttpGet("my")]
         public async Task<IActionResult> GetMyRSVPs()
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
             var result = await _rsvpService.GetMyRSVPsAsync(userId);
-            return Ok(result);
+            return Ok(new { result });
         }
 
+        //[HttpGet("my-upcoming-events")]
+        //public async Task<IActionResult> GetMyUpcomingEvents()
+        //{
+        //    var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+        //    var result = await _rsvpService.GetMyUpcomingEventsAsync(userId);
+        //    return Ok(new { result });
+        //}
+
         [HttpGet("my-upcoming-events")]
-        public async Task<IActionResult> GetMyUpcomingEvents()
+        public async Task<IActionResult> GetMyUpcomingEvents([FromQuery] string? date = null)
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var result = await _rsvpService.GetMyUpcomingEventsAsync(userId);
-            return Ok(result);
+            DateOnly? filterDate = null;
+            if (!string.IsNullOrEmpty(date) && DateOnly.TryParse(date, out var parsedDate))
+            {
+                filterDate = parsedDate;
+            }
+            var result = await _rsvpService.GetMyUpcomingEventsAsync(userId, filterDate);
+            return Ok(new { result });
         }
     }
 }

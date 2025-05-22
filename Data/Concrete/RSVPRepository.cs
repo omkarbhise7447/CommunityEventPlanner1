@@ -20,17 +20,23 @@ namespace Data.Concrete
         public async Task<RSVP> CreateRSVPAsync(RSVP rsvp)
         {
             _dbontext.RSVPs.Add(rsvp);
+
             await _dbontext.SaveChangesAsync();
+
             return await _dbontext.RSVPs.Include(r => r.Event).FirstOrDefaultAsync(r => r.Id == rsvp.Id);
         }
 
         public async Task<bool> CancelRSVPAsync(int eventId, string userId)
         {
             var rsvp = await _dbontext.RSVPs.FirstOrDefaultAsync(r => r.EventId == eventId && r.UserId == userId);
-            if (rsvp == null) return false;
+            
+            if (rsvp == null) 
+                return false;
 
             _dbontext.RSVPs.Remove(rsvp);
+
             await _dbontext.SaveChangesAsync();
+
             return true;
         }
 
@@ -50,13 +56,14 @@ namespace Data.Concrete
         public async Task<IEnumerable<RSVP>> GetMyRSVPsAsync(string userId)
         {
             return await _dbontext.RSVPs
-                .Include(r => r.Event)
-                    .ThenInclude(e => e.Location)
-                        .ThenInclude(l => l.Address)
-                .Include(r => r.Event.Category)
-                .Include(r => r.User)
-                .Where(r => r.UserId == userId)
-                .ToListAsync();
+            .Include(r => r.Event)
+                .ThenInclude(e => e.Location)
+                    .ThenInclude(l => l.Address)
+            .Include(r => r.Event.Category)
+            .Include(r => r.Event.CreatedBy)
+            .Include(r => r.User)
+            .Where(r => r.UserId == userId)
+            .ToListAsync();
         }
     }
 }

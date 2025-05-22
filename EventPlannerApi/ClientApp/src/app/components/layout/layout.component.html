@@ -1,0 +1,129 @@
+<mat-toolbar class="navbar">
+    <!-- Logo -->
+    <a class="logo" routerLink="/" (click)="closeMobileMenu()">EventSphere</a>
+  
+    <!-- Hamburger Menu for Mobile -->
+    <button mat-icon-button class="hamburger-menu" (click)="toggleMobileMenu()" *ngIf="isAuthenticated">
+      <mat-icon>{{ isMobileMenuOpen ? 'close' : 'menu' }}</mat-icon>
+    </button>
+  
+    <!-- Spacer -->
+    <span class="spacer"></span>
+  
+    <!-- Desktop Navigation for Logged-In Users -->
+    <div class="nav-links desktop-nav" *ngIf="isAuthenticated">
+      <a
+        class="nav-link"
+        routerLink="/events"
+        routerLinkActive="active-link"
+        (click)="closeMobileMenu()">
+        Browse Events
+      </a>
+      <a
+        class="nav-link"
+        routerLink="/create-event"
+        routerLinkActive="active-link"
+        (click)="closeMobileMenu()">
+        Create Event
+      </a>
+      <a
+        class="nav-link"
+        routerLink="/events-to-attend"
+        routerLinkActive="active-link"
+        (click)="closeMobileMenu()">
+        Events to Attend
+      </a>
+      <a
+        class="nav-link"
+        routerLink="/my-events"
+        routerLinkActive="active-link"
+        (click)="closeMobileMenu()">
+        My Events
+      </a>
+      <div class="profile-menu" [matMenuTriggerFor]="profileMenu">
+        <mat-icon class="profile-icon">person</mat-icon>
+        <span class="user-email">{{ userEmail }}</span>
+        <mat-menu #profileMenu="matMenu" xPosition="before">
+          <button mat-menu-item routerLink="/profile" (click)="closeMobileMenu()">
+            <mat-icon>person</mat-icon>
+            Profile
+          </button>
+          <button mat-menu-item (click)="logout()">
+            <mat-icon>logout</mat-icon>
+            Logout
+          </button>
+        </mat-menu>
+      </div>
+    </div>
+  
+    <!-- Desktop Navigation for Logged-Out Users -->
+    <div class="nav-links desktop-nav" *ngIf="!isAuthenticated">
+      <a
+        class="nav-link"
+        routerLink="/events"
+        routerLinkActive="active-link"
+        (click)="closeMobileMenu()">
+        Events
+      </a>
+      <button
+        mat-button
+        class="nav-button"
+        routerLink="/login"
+        routerLinkActive="active-link"
+        (click)="closeMobileMenu()">
+        Login
+      </button>
+      <button
+        mat-button
+        class="nav-button"
+        routerLink="/register"
+        routerLinkActive="active-link"
+        (click)="closeMobileMenu()">
+        Register
+      </button>
+    </div>
+  
+    <!-- Mobile Navigation (Hamburger Menu Dropdown) -->
+    <div class="mobile-nav" *ngIf="isMobileMenuOpen && isAuthenticated">
+      <a
+        class="mobile-nav-link"
+        routerLink="/events"
+        routerLinkActive="active-link"
+        (click)="closeMobileMenu()">
+        Browse Events
+      </a>
+      <a
+        class="mobile-nav-link"
+        routerLink="/create-event"
+        routerLinkActive="active-link"
+        (click)="closeMobileMenu()">
+        Create Event
+      </a>
+      <a
+        class="mobile-nav-link"
+        routerLink="/events-to-attend"
+        routerLinkActive="active-link"
+        (click)="closeMobileMenu()">
+        Events to Attend
+      </a>
+      <a
+        class="mobile-nav-link"
+        routerLink="/my-events"
+        routerLinkActive="active-link"
+        (click)="closeMobileMenu()">
+        My Events
+      </a>
+      <a
+        class="mobile-nav-link"
+        routerLink="/profile"
+        routerLinkActive="active-link"
+        (click)="closeMobileMenu()">
+        Profile
+      </a>
+      <a class="mobile-nav-link" (click)="logout()">Logout</a>
+    </div>
+  </mat-toolbar>
+  
+  <div class="container">
+    <router-outlet></router-outlet>
+  </div>

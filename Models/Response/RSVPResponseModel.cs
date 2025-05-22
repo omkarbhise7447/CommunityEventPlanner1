@@ -11,7 +11,9 @@ namespace Models.Response
     {
         public int Id { get; set; }
         public int EventId { get; set; }
+        public string UserId { get; set; }
         public string EventTitle { get; set; }
+        public string Description { get; set; }
 
         public DateOnly EventDate { get; set; }
 
@@ -19,5 +21,7 @@ namespace Models.Response
         public DateTime RSVPDate { get; set; }
 
         public LocationDto Location { get; set; }
+        public string categoryName { get; set; }
+        public UserDto user { get; set; }
     }
 }

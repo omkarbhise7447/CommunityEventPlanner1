@@ -16,7 +16,23 @@ namespace Services.Mapper.EventService
         public EventMappingProfile() 
         {
             CreateMap<AddressDto, Address>();
-            CreateMap<Event, EventResponseModel>();
+
+            CreateMap<User, UserDto>()
+                .ForMember(dest => dest.UserId, opt => opt.MapFrom(src => src.Id));
+
+            CreateMap<Event, EventResponseModel>()
+                .ForMember(dest => dest.Location, opt => opt.MapFrom(src => src.Location))
+                .ForMember(dest => dest.user, opt => opt.MapFrom(src => src.CreatedBy));
+                
+                
+
+            CreateMap<Location, LocationDto>().
+                ForMember(dest => dest.Address, opt=> opt.MapFrom(src => src.Address));
+            
+             
+              
+          
+            CreateMap<Address, AddressDto>();
         }
     }
 }

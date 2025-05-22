@@ -21,10 +21,11 @@ namespace Models.Response
         public DateOnly Date { get; set; }
 
         public TimeOnly Time { get; set; }
-        public int LocationId { get; set; }
-        public int CategoryId { get; set; }
+        public LocationDto Location { get; set; }
+        public string categoryName { get; set; }
 
-        public string CreatedByUserId { get; set; }
+        //public string createdByUserId { get; set; }
+        public UserDto user { get; set; }
 
     }
 }

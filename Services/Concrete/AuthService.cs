@@ -29,16 +29,22 @@ namespace Services.Concrete
         public async Task<string?> RegisterAsync(UserRegisterModel registerModel)
         {
             if (_authRepository.EmailExists(registerModel.Email))
+            {
+
                 return "Email is already registered.";
+            }
 
             var user = _mapper.Map<User>(registerModel);
 
             var result = await _authRepository.RegisterUserAsync(user, registerModel.Password);
 
             if (!result.Succeeded)
-                return string.Join(", ", result.Errors.Select(e => e.Description));
+            {
 
-            return null; // success
+                return string.Join(", ", result.Errors.Select(e => e.Description));
+            }
+
+            return null; 
         }
 
         public async Task<string?> LoginAsync(LoginModel model)

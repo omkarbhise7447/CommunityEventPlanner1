@@ -12,23 +12,23 @@ namespace Data.Configuration
     {
         public void Configure(EntityTypeBuilder<RSVP> builder)
         {
-            // Configure the RSVP entity
-            builder.HasKey(r => r.Id); // Ensure Id is the primary key
+           
+            builder.HasKey(r => r.Id);
 
-            // Configure User and Event relationships
+            
             builder.HasOne(r => r.User)
                 .WithMany(u => u.RSVPs)
                 .HasForeignKey(r => r.UserId)
-                .OnDelete(DeleteBehavior.Restrict); // Prevent cascade delete for RSVPs
+                .OnDelete(DeleteBehavior.Restrict); 
 
             builder.HasOne(r => r.Event)
                 .WithMany(e => e.RSVPs)
                 .HasForeignKey(r => r.EventId)
-                .OnDelete(DeleteBehavior.Restrict); // Prevent cascade delete for RSVPs
+                .OnDelete(DeleteBehavior.Cascade); 
 
-            // Ensure that a user can RSVP only once per event
+            
             builder.HasIndex(r => new { r.UserId, r.EventId })
-                .IsUnique(); // Enforce uniqueness for each RSVP (user can only RSVP once per event)
+                .IsUnique(); 
         }
     }
 }

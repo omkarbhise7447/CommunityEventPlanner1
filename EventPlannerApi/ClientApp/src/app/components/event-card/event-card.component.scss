@@ -1,0 +1,75 @@
+:host {
+    --primary-color: #c084fc;
+    --primary-hover: #a855f7;
+  }
+
+  .event-card {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .event-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+  }
+
+  .event-header {
+    background: linear-gradient(90deg, var(--primary-color) 0%, var(--primary-hover) 100%);
+    padding: 16px;
+    color: white;
+    text-align: center;
+  }
+
+  .event-header h3 {
+    margin: 0;
+    font-size: 1.4rem;
+    font-weight: 500;
+  }
+
+  .event-details {
+    padding: 16px;
+    color: #333;
+  }
+
+  .event-details p {
+    margin: 8px 0;
+    font-size: 0.95rem;
+  }
+
+  .event-details strong {
+    color: #555;
+  }
+
+  .event-actions {
+    display: flex;
+    justify-content: flex-end;
+    padding: 8px 16px;
+    border-top: 1px solid #eee;
+  }
+
+  .event-actions button {
+    color: var(--primary-color);
+  }
+
+  .event-actions button:hover {
+    color: var(--primary-hover);
+  }
+
+  @media (max-width: 768px) {
+    .event-card {
+      margin: 0 auto;
+      max-width: 100%;
+    }
+
+    .event-header h3 {
+      font-size: 1.2rem;
+    }
+
+    .event-details p {
+      font-size: 0.9rem;
+    }
+  }

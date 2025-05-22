@@ -30,11 +30,13 @@ namespace Data.Concrete
 
         public bool EmailExists(string email)
         {
+
             return _userManager.Users.Any(u => u.Email == email);
         }
 
         public async Task<User> GetUserByEmailAsync(string email)
         {
+
             return await _userManager.FindByEmailAsync(email);
         }
     

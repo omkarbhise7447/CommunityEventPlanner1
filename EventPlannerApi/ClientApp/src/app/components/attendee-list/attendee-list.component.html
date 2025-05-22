@@ -1,0 +1,26 @@
+<app-loader [loading]="loading"></app-loader>
+
+<mat-card class="attendee-card">
+  <mat-card-header>
+    <mat-card-title>Attendees</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div *ngIf="error" class="error">
+      <p>{{ error }}</p>
+    </div>
+    <mat-list *ngIf="!loading && !error">
+      <mat-list-item *ngFor="let attendee of attendees" class="attendee-item">
+        <div class="attendee-content">
+          <mat-icon class="profile-icon">person</mat-icon>
+          <div class="attendee-info">
+            <span class="attendee-name">{{ attendee.name }}</span>
+            <span class="attendee-email">({{ attendee.email }})</span>
+          </div>
+        </div>
+      </mat-list-item>
+      <div *ngIf="attendees.length === 0" class="no-attendees">
+        <p>No attendees yet.</p>
+      </div>
+    </mat-list>
+  </mat-card-content>
+</mat-card>
