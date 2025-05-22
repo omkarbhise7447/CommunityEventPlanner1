@@ -32,3 +32,8 @@ npm install
 3. Run the Frontend
 
 ng serve
+
+Backend Run Instructions
+
+click on CommunityEventPlanner.sln
+
