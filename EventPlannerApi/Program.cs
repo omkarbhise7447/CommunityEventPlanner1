@@ -120,6 +120,9 @@ namespace EventPlannerApi
             builder.Services.AddTransient<IRSVPService, RSVPService>();
             builder.Services.AddTransient<ICategoryRepository, CategoryRepository>();
             builder.Services.AddTransient<ICategoryService, CategoryService>();
+            builder.Services.AddTransient<IUserRepository, UserRepository>();
+            builder.Services.AddTransient<IUserService, UserService>();
+
 
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 

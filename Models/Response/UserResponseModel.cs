@@ -4,14 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Models.Common
+namespace Models.Response
 {
-    public class UserDto
+    public class UserResponseModel
     {
-        public string UserId {  get; set; }
+        public int Id { get; set; }
         public string UserName { get; set; }
         public string Email { get; set; }
-
-       // public string password { get; set; }
     }
 }
